@@ -18,12 +18,16 @@ function startGame(){
     canvas.setAttribute('width',canvasSize);
     canvas.setAttribute('height', canvasSize);
 
-    const elementsSize = (canvasSize / 10) - 1;
+    const elementsSize = (canvasSize / 10) - 2;
 
     game.font = elementsSize + 'px Verdana';
-    game.textAlign = 'end';
+    game.textAlign = 'center';
     
     for (let i = 1; i <= 10; i++){
+        if ( i == 1){
+            game.fillText(emojis['X'], elementsSize * i , elementsSize);
+        }
+
         game.fillText(emojis['X'], elementsSize * i, elementsSize);
     }
     
