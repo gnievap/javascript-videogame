@@ -1,14 +1,14 @@
 const canvas = document.querySelector('#game');
 const game = canvas.getContext('2d');
 
-window.addEventListener('load', startGame);
+let canvasSize;
+let elementsSize;
 
-function startGame(){
-    // función para inicializar al inicio del juego
+window.addEventListener('load', setCanvasSize);
+window.addEventListener('resize', setCanvasSize);
 
+function setCanvasSize(){
     // Definir el tamaño del canvas
-    let canvasSize;
-
     if ( window.innerHeight > window.innerWidth ){
         canvasSize = window.innerWidth * 0.8;
     } else {
@@ -18,29 +18,18 @@ function startGame(){
     canvas.setAttribute('width',canvasSize);
     canvas.setAttribute('height', canvasSize);
 
-    const elementsSize = (canvasSize / 10) - 2;
+    elementsSize = (canvasSize / 10) - 2;
+
+    startGame();
+}
+
+function startGame(){
+    // función para inicializar el juego
 
     game.font = elementsSize + 'px Verdana';
     game.textAlign = 'center';
     
     for (let i = 1; i <= 10; i++){
-        if ( i == 1){
-            game.fillText(emojis['X'], elementsSize * i , elementsSize);
-        }
-
-        game.fillText(emojis['X'], elementsSize * i, elementsSize);
+            game.fillText(emojis['X'], elementsSize, elementsSize * i);
     }
-    
-
-
-    /*
-    // dibujar un rectangulo: x1, y1, ancho, altura
-    game.fillRect(0, 0, 100, 100);
-    // borra utilizando un rectángulo
-    game.clearRect(50, 50, 50, 50);
-    game.font = '25px Verdana';
-    game.fillStyle = 'purple';
-    game.textAlign = 'center';
-    game.fillText('Platzi', 100, 100);*/
-    
 }
