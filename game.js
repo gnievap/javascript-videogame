@@ -98,25 +98,47 @@ function moveByKeys(event){
 
 function moveUp(){
     console.log('Arriba');
-    playerPosition.y -= elementsSize;
-    movePlayer();
-    startGame();
+    if ( (playerPosition.y - elementsSize) <  0 ){  // < elementsSize 
+        console.log("Posición de coordenada fuera del mapa");
+    }
+    else {
+        playerPosition.y -= elementsSize;
+        movePlayer();
+        startGame();
+    }
+
 }
 
 function moveLeft(){
     console.log('Izquierda');
-    playerPosition.x -= elementsSize;
-    startGame();
+    if ( (playerPosition.x - elementsSize) <  elementsSize ){  // < elementsSize 
+        console.log("Posición de coordenada fuera del mapa");
+    }
+    else {
+        playerPosition.x -= elementsSize;
+        startGame();
+        }
 }
 
 function moveRight(){
     console.log('Derecha');
-    playerPosition.x += elementsSize;
-    startGame();
-}
+    if ( (playerPosition.x + elementsSize) > canvasSize){  // < elementsSize 
+        console.log("Posición de coordenada fuera del mapa");
+    }
+    else {
+        playerPosition.x += elementsSize;
+        startGame();
+    }
+    }
 
 function moveDown(){
     console.log('Abajo');
-    playerPosition.y += elementsSize;
-    startGame();
+
+    if ( (playerPosition.y + elementsSize) > canvasSize){  // < elementsSize 
+        console.log("Posición de coordenada fuera del mapa");
+    }
+    else {
+        playerPosition.y += elementsSize;
+        startGame();
+    }
 }
