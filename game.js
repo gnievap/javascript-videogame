@@ -34,6 +34,10 @@ let enemyPositions = [];
 window.addEventListener('load', setCanvasSize);
 window.addEventListener('resize', setCanvasSize);
 
+function fixNumber(n){
+    return Number(n.toFixed(2));
+}
+
 function setCanvasSize(){
     // Definir el tamaño del canvas
     if ( window.innerHeight > window.innerWidth ){
@@ -42,10 +46,15 @@ function setCanvasSize(){
         canvasSize = window.innerHeight * 0.8;
     }
 
+    canvasSize = Number(canvasSize.toFixed(0))  ;
+
     canvas.setAttribute('width',canvasSize);
     canvas.setAttribute('height', canvasSize);
 
     elementsSize = (canvasSize / 10) - 2;
+
+    playerPosition.x = undefined;
+    playerPosition.y = undefined;
 
     startGame();
 }
@@ -55,12 +64,12 @@ function startGame(){
 
     game.font = elementsSize + 'px Verdana';
     game.textAlign = 'center';
-    
+
     const map = maps[level];
 
     if ( !map ){
         gameWin();
-        return;s
+        return;
     }
 
     if ( !timeStart ){
@@ -108,12 +117,11 @@ function startGame(){
                 });
                 console.log({enemyPositions});
             }
-            
 
             game.fillText(emoji, posX, posY);
         });
     });
-    
+
     movePlayer();
 }
 
@@ -193,8 +201,8 @@ function showLives(){
     const heartsArray = Array(lives).fill(emojis['HEART']);
     // console.log(heartsArray);
 
-    spanLinves.innerHTML = "";
-    heartsArray.forEach( heart => spanLinves.append(heart) );
+    spanLives.innerHTML = "";
+    heartsArray.forEach( heart => spanLives.append(heart) );
 
 }
 
