@@ -5,6 +5,7 @@ const btnUp = document.querySelector('#up');
 const btnLeft = document.querySelector('#left');
 const btnRight = document.querySelector('#right');
 const btnDown = document.querySelector('#down');
+
 const spanLives = document.querySelector('#lives');
 const spanTime = document.querySelector('#time');
 const spanRecord = document.querySelector('#record');
@@ -61,6 +62,7 @@ function setCanvasSize(){
 
 function startGame(){
     // función para inicializar el juego
+    console.log({ canvasSize, elementsSize });
 
     game.font = elementsSize + 'px Verdana';
     game.textAlign = 'center';
@@ -103,19 +105,19 @@ function startGame(){
                 if ( !playerPosition.x && !playerPosition.y ){
                     playerPosition.x = posX;
                     playerPosition.y = posY;
-                    console.log({playerPosition});
+                    //console.log({playerPosition});
                 }
             }
             else if ( col == 'I' ){
                     giftPosition.x = posX;
                     giftPosition.y = posY;
-                    console.log({giftPosition});
+                   // console.log({giftPosition});
             } else if ( col == 'X' ) {
                 enemyPositions.push( {
                     x: posX,
                     y: posY,
                 });
-                console.log({enemyPositions});
+                //console.log({enemyPositions});
             }
 
             game.fillText(emoji, posX, posY);
@@ -130,8 +132,8 @@ function movePlayer(){
     const giftCollisionY = playerPosition.y.toFixed(3) == giftPosition.y.toFixed(3);
     const giftCollision = giftCollisionX && giftCollisionY;
 
-    console.log( giftCollisionX );
-    console.log( giftCollisionY );
+    //console.log( giftCollisionX );
+    //console.log( giftCollisionY );
     if ( giftCollision ){
         //console.log('Subiste de nivel!!!');
         levelWin();
@@ -147,7 +149,6 @@ function movePlayer(){
         //console.log('Chocaste contra un enemigo :(');
         levelFail();
     }
-
 
     game.fillText(emojis['PLAYER'], playerPosition.x, playerPosition.y);
 }
@@ -191,8 +192,7 @@ function gameWin(){
         }
     } else {
         localStorage.setItem('record_time', playerTime);
-        pResult.innerHTML = 'Primera vez';
-
+        pResult.innerHTML = 'Primera vez? Muy bien, pero ahora trata de superar tu tiempo';
     }
     console.log({recordTime, playerTime});
 }
@@ -245,7 +245,7 @@ function moveUp(){
 
 function moveLeft(){
     console.log('Izquierda');
-    if ( (playerPosition.x - elementsSize) <  elementsSize ){  // < elementsSize 
+    if ( (playerPosition.x - elementsSize) <  elementsSize ){
         console.log("Posición de coordenada fuera del mapa");
     }
     else {
@@ -256,7 +256,7 @@ function moveLeft(){
 
 function moveRight(){
     console.log('Derecha');
-    if ( (playerPosition.x + elementsSize) > canvasSize){  // < elementsSize 
+    if ( (playerPosition.x + elementsSize) > canvasSize){
         console.log("Posición de coordenada fuera del mapa");
     }
     else {
@@ -268,7 +268,7 @@ function moveRight(){
 function moveDown(){
     console.log('Abajo');
 
-    if ( (playerPosition.y + elementsSize) > canvasSize){  // < elementsSize 
+    if ( (playerPosition.y + elementsSize) > canvasSize){
         console.log("Posición de coordenada fuera del mapa");
     }
     else {
